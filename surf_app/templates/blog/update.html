@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="login-center well">
+  <h1>Edit Post</h1>
+  <form class="input-forms justify-content-center" method="post">
+    <div class="form-group input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-sunglasses"></i></span>
+      <input name="title" class="form-control" id="title" placeholder="Title"
+      value="{{ request.form['title'] or post['title'] }}" required>
+    </div>
+    <div class="form-group input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+      <textarea rows="6" name="body" class="form-control" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Save">
+
+  </form>
+  <hr>
+  <form class="input-forms justify-content-center" action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+    <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+</div>
+{% endblock %}
