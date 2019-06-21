@@ -25,7 +25,7 @@ def user_profile(username):
 
     user_details = user.to_dict()
     return render_template('user/user_profile.html', user=user_details, posts=user_posts,
-        is_following=user.is_following(username))
+        is_following=g.user.is_following(username))
 
 @bp.route('/follow/<username>')
 @login_required
@@ -40,7 +40,7 @@ def follow(username):
         flash('You can\'t Follow yourself')
         return redirect(url_for('blog.index'))
     elif current_user.is_following(username):
-        flash('You are already following {}.format(username)')
+        flash("You are already following {}".format(username))
         return redirect(url_for('user.user_profile',username=username))
 
     relation = UserRelations(follower_id=g.user.id, followed_id=follow_user.id)

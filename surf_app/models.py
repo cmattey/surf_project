@@ -33,8 +33,8 @@ class User(db.Model):
         digest = md5(self.email.lower().encode("utf-8")).hexdigest()
         return "https://www.gravatar.com/avatar/{}?d=retro&s={}".format(digest,size)
 
-    def is_following(self, user):
-        user_obj = User.query.filter_by(username=user).first()
+    def is_following(self, username):
+        user_obj = User.query.filter_by(username=username).first()
         follower = UserRelations.query.filter_by(follower_id=self.id,followed_id=user_obj.id).first()
         if follower is None:
             return False
