@@ -30,7 +30,7 @@ class User(db.Model):
 
     def avatar(self, size):
         """ Generates profile image link for new users using gravatar"""
-        digest = md5(self.email.lower().encode("utf-8")).hexdigest()
+        digest = md5(self.username.lower().encode("utf-8")).hexdigest()
         return "https://www.gravatar.com/avatar/{}?d=retro&s={}".format(digest,size)
 
     def is_following(self, username):

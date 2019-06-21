@@ -8,15 +8,18 @@ class Config(object):
     # retrieve from local environemt file
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'this-really-needs-to-be-changed'
     SQLALCHEMY_DATABASE_URI  = os.environ['DATABASE_URL']
+    POSTS_PER_PAGE = 5
 
 
 class ProductionConfig(Config):
     DEBUG = False
+    POSTS_PER_PAGE = 15
 
 
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    POSTS_PER_PAGE = 15
 
 
 class DevelopmentConfig(Config):

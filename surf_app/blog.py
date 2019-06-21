@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from surf_app.auth import login_required
 from surf_app.models import User,Post,UserRelations
-from surf_app import db
+from surf_app import db, app
 
 bp = Blueprint('blog', __name__)
 
@@ -18,8 +18,15 @@ def landing_page():
 
 @bp.route('/home')
 def index():
-    posts = Post.query.order_by(Post.created.desc()).all()
-    return render_template('blog/index.html', posts = posts)
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.created.desc()).paginate(page,
+        app.config['POSTS_PER_PAGE'], error_out = False)
+
+    next_url = url_for('blog.index',page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('blog.index',page=posts.prev_num) if posts.has_prev else None
+
+    return render_template('blog/index.html', posts = posts.items,
+        next_url = next_url, prev_url = prev_url)
 
 @bp.route('/create', methods=('GET','POST'))
 @login_required

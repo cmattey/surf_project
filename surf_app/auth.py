@@ -52,7 +52,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user.id
-            return redirect(url_for('index'))
+            return redirect(url_for('blog.index'))
 
         flash(error)
 
@@ -61,8 +61,8 @@ def login():
 @bp.route('/logout')
 def logout():
     session.clear()
-    # flash('Logged out succesfully')
-    return redirect(url_for('index'))
+    flash('Logged out succesfully')
+    return redirect(url_for('blog.landing_page'))
 
 @bp.before_app_request
 def load_logged_in_user():
