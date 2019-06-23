@@ -14,14 +14,6 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 def user_profile(username):
     user = User.query.filter_by(username=username).first()
     user_posts = user.get_posts()
-    # Making call to our API to access user information
-    # user_api_url = "http://localhost:5000/api/users/{}".format(user.id)
-    # user_api_response = requests.get(user_api_url)
-    # try:
-    #     user_api_response.raise_for_status()
-    # except Exception as exc:
-    #     print("There was a problem with SURF API:",(exc))
-    # user_details = user_api_response.json()
 
     user_details = user.to_dict()
     return render_template('user/user_profile.html', user=user_details, posts=user_posts,

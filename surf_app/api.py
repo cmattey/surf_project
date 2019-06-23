@@ -14,7 +14,10 @@ def get_user(id):
 
 @bp.route('/users',methods=('GET',))
 def get_users():
-    pass
+    page = request.args.get('page',1, type=int)
+    per_page = min(request.args.get('per_page',10, type=int), 20)
+    data = User.to_paginated_dict(User.query, page, per_page,'api.get_users')
+    return jsonify(data)
 
 @bp.route('/users/<int:id>/followers',methods=('GET',))
 def get_followers(id):

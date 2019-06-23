@@ -3,7 +3,37 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask import url_for
 
-class User(db.Model):
+
+class PaginatedAPI():
+    """
+    Inherit this class to create Paginated APIs
+    """
+    @staticmethod
+    def to_paginated_dict(query, page, per_page, api_endpoint, **kwargs):
+        resources = query.paginate(page, per_page, error_out=False)
+
+        data = {
+            'items': [item.to_dict() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            },
+            '_links': {
+                'self': url_for(api_endpoint, page=page, per_page=per_page,
+                                **kwargs),
+                'next': url_for(api_endpoint, page=page + 1, per_page=per_page,
+                                **kwargs) if resources.has_next else None,
+                'prev': url_for(api_endpoint, page=page - 1, per_page=per_page,
+                                **kwargs) if resources.has_prev else None
+            }
+        }
+
+        return data
+
+
+class User(db.Model, PaginatedAPI):
     """
     Defines the User relation which contains information about users
     on the surf central platform.
@@ -57,7 +87,7 @@ class User(db.Model):
             flash("You have unfollowed {}".format(user))
 
     def get_posts(self):
-        posts = Post.query.filter_by(author_id=self.id).all()
+        posts = Post.query.filter_by(author_id=self.id).order_by(Post.created.desc()).all()
         return posts
 
     def get_followers(self):
@@ -92,6 +122,8 @@ class User(db.Model):
             'post_count' : len(self.get_posts()),
             'follower_count' : len(self.get_followers()),
             'followed_count' : len(self.get_followed()),
+            'about_me': self.about_me,
+            'last_seen': self.last_seen.isoformat(),
             '_links' : {
                     'self' : url_for('api.get_user',id=self.id),
                     'followers' : url_for('api.get_followers',id=self.id),
@@ -100,6 +132,14 @@ class User(db.Model):
         }
 
         return data
+
+    def from_dict(self, dict_data, new_user=False):
+        for field in ['username','about_me']:
+            setattr(self,field,dict_data[field])
+
+        if new_user and 'password' in dict_data:
+            self.set_password(dict_data['password'])
+
 
 
 class Post(db.Model):
