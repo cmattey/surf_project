@@ -17,6 +17,7 @@ def landing_page():
 
 
 @bp.route('/home')
+@login_required
 def index():
     page = request.args.get('page', 1, type=int)
     posts = g.user.get_followed_posts().paginate(
@@ -37,7 +38,7 @@ def explore():
     next_url = url_for('blog.index',page=posts.next_num) if posts.has_next else None
     prev_url = url_for('blog.index',page=posts.prev_num) if posts.has_prev else None
 
-    return render_template('blog/index.html', posts = posts.items,
+    return render_template('blog/explore.html', posts = posts.items,
         next_url = next_url, prev_url = prev_url)
 
 @bp.route('/create', methods=('GET','POST'))

@@ -39,6 +39,11 @@ body {
 .support-header-text {
   color: black;
 }
+
+#jumbo-well {
+  background: rgba(137, 195, 233, 0.3)
+}
+
 /*
 .Absolute-Center {
   margin: auto;
