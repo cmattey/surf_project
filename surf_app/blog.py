@@ -35,8 +35,8 @@ def explore():
     posts = Post.query.order_by(Post.created.desc()).paginate(page,
         app.config['POSTS_PER_PAGE'], error_out = False)
 
-    next_url = url_for('blog.index',page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('blog.index',page=posts.prev_num) if posts.has_prev else None
+    next_url = url_for('blog.explore',page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('blog.explore',page=posts.prev_num) if posts.has_prev else None
 
     return render_template('blog/explore.html', posts = posts.items,
         next_url = next_url, prev_url = prev_url)

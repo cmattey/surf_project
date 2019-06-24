@@ -6,6 +6,7 @@ from surf_app.auth import login_required
 import requests
 from surf_app.models import User, Post, UserRelations
 from surf_app import db
+from werkzeug.exceptions import abort
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -13,11 +14,34 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 @login_required
 def user_profile(username):
     user = User.query.filter_by(username=username).first()
-    user_posts = user.get_posts()
+    if not user:
+        abort(404,"User with username {} doesn't exist".format(username))
 
+    user_posts = user.get_posts()
     user_details = user.to_dict()
     return render_template('user/user_profile.html', user=user_details, posts=user_posts,
         is_following=g.user.is_following(username))
+
+@bp.route('/edit_profile', methods=('GET','POST'))
+@login_required
+def edit_profile():
+
+    if request.method=='POST':
+        input_username = request.form['username']
+        about_me = request.form['about_me']
+
+        if input_username != g.user.username:
+            if User.query.filter_by(username=input_username).first():
+                abort(403, "Username {} already in use".format(input_username))
+
+        g.user.username = input_username
+        g.user.about_me = about_me
+        db.session.commit()
+        return redirect(url_for('user.user_profile',username=input_username))
+
+    return render_template('user/edit_profile.html', user=g.user)
+
+
 
 @bp.route('/follow/<username>')
 @login_required
