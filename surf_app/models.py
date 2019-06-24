@@ -32,6 +32,13 @@ class PaginatedAPI():
 
         return data
 
+class UserRelations(db.Model):
+    """
+    This relation defines the follower-followed relation between the users.
+    """
+    __tablename__ = 'user_relations'
+    follower_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
+    followed_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
 
 class User(db.Model, PaginatedAPI):
     """
@@ -47,6 +54,14 @@ class User(db.Model, PaginatedAPI):
     last_seen = db.Column(db.DateTime, default = datetime.utcnow)
 
     posts = db.relationship('Post', backref='author')
+
+    # followers = db.relationship('User',secondary='user_relations',
+    #     primaryjoin=(UserRelations.followed_id==id))
+    followed = db.relationship(
+        'User', secondary='user_relations',
+        primaryjoin=(UserRelations.follower_id == id),
+        secondaryjoin=(UserRelations.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         """ User object representation """
@@ -135,7 +150,8 @@ class User(db.Model, PaginatedAPI):
 
     def from_dict(self, dict_data, new_user=False):
         for field in ['username','about_me']:
-            setattr(self,field,dict_data[field])
+            if field in dict_data:
+                setattr(self,field,dict_data[field])
 
         if new_user and 'password' in dict_data:
             self.set_password(dict_data['password'])
@@ -158,11 +174,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return "<Post: {}>".format(self.title)
-
-class UserRelations(db.Model):
-    """
-    This relation defines the follower-followed relation between the users.
-    """
-    __tablename__ = 'user_relations'
-    follower_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key = True)
