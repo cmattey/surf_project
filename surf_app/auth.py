@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 from surf_app import db
 from surf_app.models import User,Post,UserRelations
+from datetime import datetime
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 

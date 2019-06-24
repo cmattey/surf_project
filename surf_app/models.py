@@ -102,8 +102,23 @@ class User(db.Model, PaginatedAPI):
             flash("You have unfollowed {}".format(user))
 
     def get_posts(self):
+        """
+        Returns posts by current user
+        """
         posts = Post.query.filter_by(author_id=self.id).order_by(Post.created.desc()).all()
         return posts
+
+    def get_followed_posts(self):
+        """
+        Returns all posts by users followed by current user
+        """
+        followed_posts = Post.query.join(
+            UserRelations,(UserRelations.followed_id==Post.author_id)).filter(
+            UserRelations.follower_id==self.id)
+
+        own_posts = Post.query.filter_by(author_id=self.id)
+
+        return followed_posts.union(own_posts).order_by(Post.created.desc())
 
     def get_followers(self):
         """
