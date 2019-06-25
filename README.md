@@ -20,21 +20,21 @@ _The instructions assume you have a local Postgres Database with the name surf_d
 
 Install the required packages using the **requirements.txt**
 You can run the following command in your terminal in the project root with a virtual environment active(recommended):<br>
-``
+```sh
 pip install -r requirements.txt
-``
+```
 
 Follow that by exporting the following variables in your terminal instance:<br>
-``
+```sh
 export APP_SETTINGS="config.DevelopmentConfig"
 export DATABASE_URL="postgresql://localhost/surf_db"
-``
+```
 
 Make sure you are in the project root folder in your terminal and run the following command:
 
-``
+```sh
 python blog_start.py
-``
+```
 <br>
 Proceed to "localhost:5000/" on your browser, and you should be able to access a local deployment of the site!
 
