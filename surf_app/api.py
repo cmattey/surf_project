@@ -55,17 +55,19 @@ def create_user():
 
     return response
 
-
-@bp.route('/users/<int:id>',methods=('PUT',))
-def update_user(id):
-    data = request.args or {}
-    user = User.query.get_or_404(id)
-
-    if 'username' in data and data['username']!=user.username and \
-        User.query.filter_by(username=data['username']):
-        return "Please choose a different username"
-
-    user.from_dict(data, new_user=False)
-    db.session.commit()
-
-    return jsonify(user.to_dict())
+"""
+Uncomment the update_user API once, authentication is implemented
+"""
+# @bp.route('/users/<int:id>',methods=('PUT',))
+# def update_user(id):
+#     data = request.args or {}
+#     user = User.query.get_or_404(id)
+#
+#     if 'username' in data and data['username']!=user.username and \
+#         User.query.filter_by(username=data['username']):
+#         return "Please choose a different username"
+#
+#     user.from_dict(data, new_user=False)
+#     db.session.commit()
+#
+#     return jsonify(user.to_dict())
