@@ -1,6 +1,4 @@
 # Surf Central
-<hr>
-
 
 Surf Central is a Twitter like application for surfing enthusiasts.<br>
 Even though the site is currently under development, you can view the Staging site at the following address(built for Desktop):
