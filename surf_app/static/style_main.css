@@ -1,8 +1,10 @@
+html{
+  /* height: 100% */
+}
+
 body {
   padding-top: 50px;
-  font-family: 'Raleway', sans-serif;
-  /* background-image: url(images/surf_bg_2.jpg);
-  background-size: cover; */
+  font-family: "Helvetica Neue", Helvetica,'Raleway', sans-serif;
 }
 
 .input-forms{
@@ -14,14 +16,20 @@ body {
 }
 
 .jumbo-landing-page {
-  background-image: url(images/surf_bg_2.jpg);
+  background-image: url(images/surf_bg_2_cropped.jpg);
   background-size: cover;
-  text-align: center;
-  height: 700px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  /* align-items: center; */
+  padding-top: 15%;
+  padding-left: 5%;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 .jumbo-landing-page p {
-  color: black;
+  color: #0a7e8c;
 }
 
 .jumbo-index {
@@ -44,6 +52,40 @@ body {
   background: rgba(137, 195, 233, 0.3)
 }
 
+.custom-navbar {
+  background: white;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 5px;
+}
+
+.custom-navbar a{
+  color: #0a7e8c;
+}
+
+#landing-page-header{
+  font-family: "Helvetica Neue", Helvetica, serif;
+  font-weight: 150;
+  letter-spacing: 0.08em;
+  font-size: 4.5em;
+}
+
+#btn-nav-register{
+  border-radius: 4px;
+  background-color: white;
+  color: #0a7e8c;
+  border: 2px solid #0a7e8c;
+  padding: 12px;
+  margin-right: 5px;
+}
+
+#btn-nav-register:hover{
+  background-color: #dce9eb;
+}
+
+#btn-landing-page-join{
+  background-color: #0a7e8c;
+}
 /*
 .Absolute-Center {
   margin: auto;

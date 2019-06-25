@@ -2,12 +2,9 @@
 
 {% block content %}
     <div class="jumbo-landing-page">
-      <div class="container">
-        <h1 class="display-1">Welcome to Surf Central!</h1>
-        <h3 class="support-header-text">Your one-stop for all things surfing in the Bay, sign-up now and connect with
-        your friends!</h3>
-        <p><a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}"
-          role="button">Sign up</a></p>
-      </div>
+        <p id="landing-page-header">Welcome to your<br>Surfing community!</p>
+        <p class="landing-page-support-text"></p>
+        <p><a class="btn btn-primary btn-lg" id="btn-landing-page-join" href="{{ url_for('auth.register') }}"
+          role="button">Join</a></p>
     </div>
 {% endblock %}
