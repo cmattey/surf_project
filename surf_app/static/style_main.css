@@ -90,6 +90,12 @@ body {
   padding: 2%;
 }
 
+.text-center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .image-container{
   overflow: auto;
 }
