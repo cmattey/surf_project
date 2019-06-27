@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron-fluid jumbo-index">
+  <div class="index-jumbo-text" id="jumbo-well">
+    <p id="index-page-header">API Documentation</p>
+  </div>
+</div>
+
+<div class="index-container">
+  <div class="index-column-left">
+
+  </div>
+
+  <div class="index-column-center">
+    <div class="list-group">
+      <div class="well">
+<table class="table table-striped">
+<thead>
+<thead class="thead-dark">
+<tr>
+  <td><b>HTTP Method</b></td>
+  <td align="center"><b>Resource URL</b></td>
+  <td><b>Comments</b></td>
+</tr>
+</thead>
+</thead>
+<tbody>
+<tr>
+  <td>GET</td>
+  <td align="center"><code>/api/users/&lt;int:id&gt;</code></td>
+  <td>Return user info</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td align="center"><code>/api/users</code></td>
+  <td>Return all users</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td align="center"><code>/api/users?username=<>&password=<></code></td>
+  <td>Register new user</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td align="center"><code>/api/users/&lt;int:id&gt;/followers</code></td>
+  <td>Return followers</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td align="center"><code>/api/users/&lt;int:id&gt;/followed</code></td>
+  <td>Return followed users</td>
+</tr>
+</tbody>
+</table>
+      </div>
+      <div class="well">
+        <h2>Sample User representation</h2>
+        <pre><code>
+{
+	"id": 3,
+	"username": "Andy",
+	"post_count": 3,
+	"follower_count": 2,
+	"followed_count": 0,
+	"about_me": "Hey, it's Andy!!",
+	"last_seen": "2019-06-24T00:58:40.899952",
+	"_links": {
+		"self": "/api/users/3",
+		"followers": "/api/users/3/followers",
+		"followed": "/api/users/3/followed"
+	}
+}
+        </code></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="index-column-right">
+  </div>
+</div>
+
+{% endblock %}

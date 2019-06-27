@@ -8,6 +8,10 @@ from surf_app import db
 
 bp = Blueprint('api', __name__,url_prefix='/api')
 
+@bp.route('/doc')
+def api_doc():
+    return render_template('api_doc.html')
+
 @bp.route('/users/<int:id>',methods=('GET',))
 def get_user(id):
     user = User.query.get_or_404(id)
