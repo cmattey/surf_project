@@ -8,10 +8,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-from . import auth, blog, user, api
+from . import auth, blog, user, api, beaches
 
 app.register_blueprint(auth.bp)
 app.register_blueprint(blog.bp)
 app.register_blueprint(user.bp)
 app.register_blueprint(api.bp)
+app.register_blueprint(beaches.bp)
 # app.add_url_rule('/',endpoint='index')

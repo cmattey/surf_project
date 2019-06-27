@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron-fluid jumbo-index">
+  <div class="index-jumbo-text" id="jumbo-well">
+    <p id="index-page-header">Bay Area Beaches</p>
+    <p id="index-page-header">Checkin for swell forecasts</p>
+  </div>
+</div>
+
+<div class="index-container">
+  <div class="index-column-left">
+    <div class="well">
+
+    </div>
+
+  </div>
+
+  <div class="index-column-center">
+    <div class="list-group">
+      {% if beaches|length == 0 %}
+      <p class="well">Looks like our database is being updated with new locations.
+        Checkin soon for swell updates</p>
+      {% endif %}
+      {% for beach in beaches %}
+      <div class="well">
+            <h2 class="list-group-item-heading">{{ beach['beach_name'] }}</h2>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="index-column-right">
+    <div class="well">
+      <a href="http://magicseaweed.com"><img src="https://im-1-uk.msw.ms/msw_powered_by.png"></a>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

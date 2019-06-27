@@ -23,7 +23,7 @@
 </div>
 
 <div class="index-container">
-  <div class="index-column-left">Left
+  <div class="index-column-left">
     <div class="well">
       <h2>{{ g.user['username'] }}</h2>
       <p>{{ g.user['about_me'] or "" }}</p>
@@ -34,7 +34,7 @@
 
   </div>
 
-  <div class="index-column-center">Center
+  <div class="index-column-center">
     <div class="list-group">
       {% if posts|length == 0 %}
       <p class="well">Whoops, looks like you're not following anybody.<br>Head to the <b>Explore</b> page through the top bar and find new people to follow!</p>
@@ -68,7 +68,7 @@
     </nav>
   </div>
 
-  <div class="index-column-right">Right
+  <div class="index-column-right">
     <div class="well">
       <p>Swell Info shows up here</p>
 
