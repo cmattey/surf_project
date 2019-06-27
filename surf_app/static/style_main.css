@@ -1,5 +1,4 @@
 html{
-  /* height: 100% */
 }
 
 body {
@@ -8,7 +7,7 @@ body {
 }
 
 .input-forms{
-  padding-left: 25px;
+
 }
 
 .user-name {
@@ -33,7 +32,8 @@ body {
 }
 
 .jumbo-index {
-  background-image: url(images/surf_bg_5.jpg);
+  /* background-image: url(images/surf_bg_5.jpg); */
+  background: #dce9eb;
   background-size:cover;
 }
 
@@ -48,10 +48,6 @@ body {
   color: black;
 }
 
-#jumbo-well {
-  background: rgba(137, 195, 233, 0.3)
-}
-
 .custom-navbar {
   background: white;
   padding-right: 5%;
@@ -61,6 +57,44 @@ body {
 
 .custom-navbar a{
   color: #0a7e8c;
+}
+
+.index-container{
+}
+
+.index-column-left{
+  float: left;
+  width: 25%;
+  /* padding-left: 5%; */
+  padding: 2% 1% 2% 5%;
+}
+.index-column-right{
+  float: right;
+  width: 30%;
+  /* padding-right: 5%; */
+  padding: 2% 5% 2% 1%;
+}
+.index-column-center{
+  display: inline-block;
+  width: 45%;
+  padding: 2%;
+  height: 100%;
+  /* position: relative; */
+}
+
+.index-jumbo-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  padding: 2%;
+}
+
+#index-page-header{
+  font-family: "Helvetica Neue", Helvetica, serif;
+  font-weight: 150;
+  letter-spacing: 0.01em;
+  font-size: 2.5em;
 }
 
 #landing-page-header{
@@ -83,9 +117,21 @@ body {
   background-color: #dce9eb;
 }
 
+#btn-metallic-bg{
+  color: white;
+  background-color: #0a7e8c;
+}
+
+#btn-metallic-bg:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
 #btn-landing-page-join{
   background-color: #0a7e8c;
 }
+
+
 /*
 .Absolute-Center {
   margin: auto;

@@ -84,7 +84,7 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('blog.landing_page'))
 
         return view(**kwargs)
 

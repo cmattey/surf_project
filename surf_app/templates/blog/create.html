@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="login-center well">
-  <h1>New Post</h1>
+  <p id="index-page-header">New Post</p>
   <form class="input-forms justify-content-center" method="post">
     <div class="form-group input-group">
     <!-- <label for="title">Title</label> -->
@@ -21,7 +21,7 @@
     <textarea name="body" class="form-control" placeholder="What's on your mind?"
     id="body">{{ request.form['body'] }}</textarea>
     </div>
-    <input type="submit" class="btn btn-primary" value="Save">
+    <input type="submit" class="btn btn-primary" id="btn-metallic-bg" value="Save">
 
   </form>
 </div>
