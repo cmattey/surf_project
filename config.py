@@ -10,6 +10,9 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI  = os.environ['DATABASE_URL']
     POSTS_PER_PAGE = 5
 
+    MSW_API_KEY = os.environ.get('MSW_API_KEY')
+    MSW_API_URL = "http://magicseaweed.com/api/{key}/forecast/?spot_id={spot_id}"
+
 
 class ProductionConfig(Config):
     DEBUG = False
