@@ -142,6 +142,17 @@ class User(db.Model, PaginatedAPI):
         followed_users = UserRelations.query.filter_by(follower_id=self.id).all()
         return followed_users
 
+    def get_followed_ids(self):
+        """
+        Returns a set with ID's of Users that are followed by current user.
+        """
+        followed_id_set = set()
+        followed = self.get_followed()
+        for relation in followed:
+            followed_id_set.add(relation.followed_id)
+
+        return followed_id_set
+
     def to_dict(self):
         """
         Function to return meta-data about user in JSON format

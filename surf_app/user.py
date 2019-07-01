@@ -7,6 +7,7 @@ import requests
 from surf_app.models import User, Post, UserRelations
 from surf_app import db
 from werkzeug.exceptions import abort
+from flask import jsonify
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -82,3 +83,27 @@ def unfollow(username):
     db.session.commit()
     flash("You have succesfully unfollowed {}".format(username))
     return redirect(url_for('user.user_profile',username=username))
+
+@bp.route('/follow_async/<username>')
+@login_required
+def follow_async(username):
+    error = None
+    current_user = g.user
+    follow_user = User.query.filter_by(username=username).first()
+
+    if follow_user is None:
+        # flash('User {} does not exist'.format(username))
+        return jsonify({'text':"User doesn't exist"})
+    elif follow_user.id==session['user_id']:
+        # flash('You can\'t Follow yourself')
+        return jsonify({'text':"You can't follow yourself"})
+    elif current_user.is_following(username):
+        # flash("You are already following {}".format(username))
+        return jsonify({'text':"You are already following {}".format(username)})
+
+    relation = UserRelations(follower_id=g.user.id, followed_id=follow_user.id)
+    db.session.add(relation)
+    db.session.commit()
+    # flash("You have succesfully followed {}".format(username))
+
+    return jsonify({'text':"Successfully followed {}".format(username)})
