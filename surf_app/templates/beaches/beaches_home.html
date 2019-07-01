@@ -28,6 +28,7 @@
       {% for beach in beaches %}
       <div class="well">
             <h2 class="list-group-item-heading">{{ beach['beach_name'] }}</h2>
+            <p>Max Swell Height: {{ beach['beach_info']['swell']['maxBreakingHeight'] }}</p>
       </div>
       {% endfor %}
     </div>
