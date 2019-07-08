@@ -4,6 +4,9 @@ Surf Central is a Twitter like application for surfing enthusiasts.<br>
 Even though the site is currently under development, you can view the Staging site at the following address(built for Desktop):
 > http://surf-central-stage.herokuapp.com/
 
+
+![Landing Page](https://github.com/cmattey/surf_project/blob/master/surf_app/static/images/landing_page_screenshot.png)
+
 The site currently supports the following functionality:
 - Create and Edit posts.
 - View user profiles for other members in the community.
