@@ -38,7 +38,10 @@ def explore():
     next_url = url_for('blog.explore',page=posts.next_num) if posts.has_next else None
     prev_url = url_for('blog.explore',page=posts.prev_num) if posts.has_prev else None
 
-    followed_users_ids = g.user.get_followed_ids()
+    if g.user:
+        followed_users_ids = g.user.get_followed_ids()
+    else:
+        followed_users_ids = None
 
     return render_template('blog/explore.html', posts = posts.items,
         next_url = next_url, prev_url = prev_url, followed_ids=followed_users_ids)
