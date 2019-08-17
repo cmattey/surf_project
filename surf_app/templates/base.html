@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../../static/style_main.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <script <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">></script>
-  <script src="{{ url_for('static', filename='js/follow_async.js') }}"></script>
+  <script type ="text/javascript" src="{{ url_for('static', filename='js/follow_async.js') }}"></script>
 
 </head>
 
@@ -64,6 +64,7 @@
         {% endfor %}
 
     {% block content %}{% endblock %}
+
 </body>
 </html>
 <!-- </section> -->
