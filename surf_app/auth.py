@@ -73,11 +73,8 @@ def load_logged_in_user():
     else:
         g.user = User.query.filter_by(id=user_id).first()
 
-@bp.before_request
-def before_request():
     if session.get('user_id') is not None:
-        user = User.query.filter_by(id=g.user.id)
-        user.last_seen = datetime.utcnow()
+        g.user.last_seen = datetime.utcnow()
         db.session.commit()
 
 def login_required(view):
